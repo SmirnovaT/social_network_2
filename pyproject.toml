@@ -1,19 +1,19 @@
 [tool.poetry]
-name = "social_network_2"
+name = "poetry-new-project"
 version = "0.1.0"
 description = ""
 authors = ["Smirnova Tanya <75753895+SmirnovaT@users.noreply.github.com>"]
+readme = "README.md"
+#packages = [{include = "/"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.89.1"
-SQLAlchemy = "^2.0.0"
-uvicorn = "^0.20.0"
-alembic = "^1.9.2"
+sqlalchemy = "^2.0.1"
 psycopg2 = "^2.9.5"
+uvicorn = "^0.20.0"
+fastapi = "^0.89.1"
 
-[tool.poetry.dev-dependencies]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
