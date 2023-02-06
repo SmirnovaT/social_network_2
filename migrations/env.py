@@ -1,9 +1,9 @@
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
-from alembic import context
+from base import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -17,8 +17,10 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
+
+
+# target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -38,7 +40,8 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    # url = config.get_main_option("sqlalchemy.url")
+    url = "postgresql://postgres:postgres@localhost:5432/postgres"
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -57,11 +60,12 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    configuration = config.get_section(config.config_ini_section)
+    configuration['sqlalchemy.url'] = "postgresql://postgres:postgres@localhost:5432/postgres"
+    connectable = engine_from_config(configuration,
+                                     prefix="sqlalchemy.",
+                                     poolclass=pool.NullPool,
+                                     )
 
     with connectable.connect() as connection:
         context.configure(

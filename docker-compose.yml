@@ -1,14 +1,15 @@
 version: "3"
 
 services:
-  db:
+  db_network:
     image: postgres:11
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=db
+      - POSTGRES_DB=postgres
+
   api:
     build: .
     command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
@@ -17,4 +18,6 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      - db_network
+    environment:
+      SQLALCHEMY_DATABASE_URL: "postgresql://postgres:postgres@db_network:5432/postgres"
