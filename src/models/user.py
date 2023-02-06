@@ -11,4 +11,5 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     first_name = Column(String)
     last_name = Column(String)
+    phone_number = Column(String)
     password = Column(String)

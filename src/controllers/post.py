@@ -8,6 +8,11 @@ post_router = APIRouter(
 )
 
 
+# @post_router.get("/")
+# async def read_all(service: PostService = Depends(PostService)):
+#     pass
+
+
 @post_router.get("/")
-async def read_all(service: PostService = Depends(PostService)):
-    pass
+async def root():
+    return {"message": "Hello World"}
