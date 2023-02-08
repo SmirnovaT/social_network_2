@@ -17,6 +17,7 @@ asyncpg = "^0.27.0"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.5"
+minio = "^7.1.13"
 
 
 [build-system]
