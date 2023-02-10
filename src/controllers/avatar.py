@@ -15,13 +15,13 @@ avatar_router = APIRouter(
 
 @avatar_router.post("/")
 async def index(file: UploadFile = File(...)):
-    found = client.bucket_exists("tanyatrip")
+    found = client.bucket_exists("avatar")
     if not found:
-        client.make_bucket("tanyatrip")
+        client.make_bucket("avatar")
     else:
-        print("Bucket 'tanyatrip' already exists")
+        print("Bucket 'avatar' already exists")
     data = file.file.read()
     size = len(data)
-    result = client.put_object("tanyatrip", file.filename, BytesIO(data), size)
+    result = client.put_object("avatar", file.filename, BytesIO(data), size)
 
     return result
