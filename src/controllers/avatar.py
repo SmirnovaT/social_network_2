@@ -3,8 +3,8 @@ from io import BytesIO
 from fastapi import File, UploadFile, APIRouter
 from minio import Minio
 
-client = Minio(endpoint="minio", secure=True, secret_key="dkfsdfj123j2143jlkl",
-               access_key="gergrthrth56456456")
+client = Minio(endpoint="minio:9000", secure=False, access_key="dkfsdfj123j2143jlkl",
+               secret_key="gergrthrth56456456")
 
 avatar_router = APIRouter(
     prefix="/api/avatar",
@@ -22,6 +22,6 @@ async def index(file: UploadFile = File(...)):
         print("Bucket 'tanyatrip' already exists")
     data = file.file.read()
     size = len(data)
-    result = client.put_object("minio", file.filename, BytesIO(data), size)
+    result = client.put_object("tanyatrip", file.filename, BytesIO(data), size)
 
     return result
